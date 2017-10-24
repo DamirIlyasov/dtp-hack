@@ -1,5 +1,6 @@
 package com.hackteam.dtp.controller;
 
+import io.swagger.annotations.ApiImplicitParam;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -13,6 +14,12 @@ public class MainController {
         return "Server online.";
     }
 
+    @ApiImplicitParam(
+            name = "Authorization",
+            paramType = "header",
+            required = true,
+            dataType = "string"
+    )
     @ResponseBody
     @RequestMapping(value = "/secure", method = RequestMethod.GET)
     public String testSecure() {
