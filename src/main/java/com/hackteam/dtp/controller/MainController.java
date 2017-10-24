@@ -11,4 +11,10 @@ public class MainController {
     public String getHelloMessage() {
         return "Server online.";
     }
+
+    @ResponseBody
+    @RequestMapping("/secure")
+    public String testSecure() {
+        return "Your token is correct! KRASAVA";
+    }
 }
