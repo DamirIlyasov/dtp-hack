@@ -14,15 +14,11 @@ public class MainController {
         return "Server online.";
     }
 
-    @ApiImplicitParam(
-            name = "Authorization",
-            paramType = "header",
-            required = true,
-            dataType = "string"
-    )
+    @ApiImplicitParam(name = "Authorization", paramType = "header", required = true, dataType = "string")
     @ResponseBody
     @RequestMapping(value = "/secure", method = RequestMethod.GET)
     public String testSecure() {
+
         return "Your token is correct! KRASAVA";
     }
 }

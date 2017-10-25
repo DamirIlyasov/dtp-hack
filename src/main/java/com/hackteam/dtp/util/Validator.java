@@ -1,6 +1,7 @@
 package com.hackteam.dtp.util;
 
 import com.hackteam.dtp.service.UserService;
+import com.hackteam.dtp.util.requests.RequestSignUpJson;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -37,44 +38,42 @@ public class Validator extends ResponseCreator {
     }
 
 
-    public ResponseEntity<ApiResponse<Object>> getRegistrationErrorResponse(String firstName, String lastName,
-                                                                            String middleName, String email,
-                                                                            String phone, String password
+    public ResponseEntity<ApiResponse<Object>> getRegistrationErrorResponse(RequestSignUpJson requestSignUpJson
     ) {
 
-        if (!this.isNameCorrect(firstName)) {
-            logger.warn("Validator: firstname " + firstName + " is incorrect!");
+        if (!this.isNameCorrect(requestSignUpJson.getFirstName())) {
+            logger.warn("Validator: firstname " + requestSignUpJson.getFirstName() + " is incorrect!");
             return createBadResponse("FirstName is incorrect", HttpStatus.BAD_REQUEST);
 
         }
-        if (!this.isNameCorrect(lastName)) {
-            logger.warn("Validator: Lastname " + lastName + " is incorrect!");
+        if (!this.isNameCorrect(requestSignUpJson.getLastName())) {
+            logger.warn("Validator: Lastname " + requestSignUpJson.getLastName() + " is incorrect!");
             return createBadResponse("LastName is incorrect", HttpStatus.BAD_REQUEST);
         }
-        if (middleName != null && !"".equals(middleName)) {
-            if (isNameCorrect(middleName)) {
+        if (requestSignUpJson.getMiddleName() != null && !"".equals(requestSignUpJson.getMiddleName())) {
+            if (!isNameCorrect(requestSignUpJson.getMiddleName())) {
                 return createBadResponse("MiddleName is incorrect", HttpStatus.BAD_REQUEST);
 
             }
         }
-        if (!this.isEmailCorrect(email)) {
-            logger.warn("Validator: Email " + email + " is incorrect!");
+        if (!this.isEmailCorrect(requestSignUpJson.getEmail())) {
+            logger.warn("Validator: Email " + requestSignUpJson.getEmail() + " is incorrect!");
             return createBadResponse("Email is incorrect", HttpStatus.BAD_REQUEST);
         }
-        if (this.isEmailAlreadyRegistered(email)) {
-            logger.warn("Validator: User with this email " + email + " already registered!");
+        if (this.isEmailAlreadyRegistered(requestSignUpJson.getEmail())) {
+            logger.warn("Validator: User with this email " + requestSignUpJson.getEmail() + " already registered!");
             return createBadResponse("User with this email already registered", HttpStatus.BAD_REQUEST);
         }
-        if (!this.isPhoneCorrect(phone)) {
-            logger.warn("Validator: Phone " + phone + " is incorrect!");
+        if (!this.isPhoneCorrect(requestSignUpJson.getPhone())) {
+            logger.warn("Validator: Phone " + requestSignUpJson.getPhone() + " is incorrect!");
             return createBadResponse("Phone is incorrect", HttpStatus.BAD_REQUEST);
         }
-        if (this.isPhoneAlreadyRegistered(phone)) {
-            logger.warn("Validator: User with this phone " + phone + " already registered!");
+        if (this.isPhoneAlreadyRegistered(requestSignUpJson.getPhone())) {
+            logger.warn("Validator: User with this phone " + requestSignUpJson.getPhone() + " already registered!");
             return createBadResponse("User with this phone already registered", HttpStatus.BAD_REQUEST);
         }
-        if (!this.isPasswordCorrect(password)) {
-            logger.warn("Validator: Password " + password + " is incorrect!");
+        if (!this.isPasswordCorrect(requestSignUpJson.getPassword())) {
+            logger.warn("Validator: Password " + requestSignUpJson.getPassword() + " is incorrect!");
             return createBadResponse("Password is incorrect", HttpStatus.BAD_REQUEST);
         }
 
