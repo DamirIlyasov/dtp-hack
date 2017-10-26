@@ -3,6 +3,7 @@ package com.hackteam.dtp.controller;
 import io.swagger.annotations.ApiImplicitParam;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.mvc.method.annotation.ResponseBodyEmitter;
@@ -21,6 +22,7 @@ public class MainController {
     }
 
 
+    @CrossOrigin
     @RequestMapping("/sseTest")
     public ResponseBodyEmitter handleRequest() {
 
