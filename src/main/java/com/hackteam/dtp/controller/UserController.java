@@ -12,6 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController("/secure/v1")
@@ -22,7 +23,7 @@ public class UserController extends ResponseCreator {
     @Autowired
     CarService carService;
 
-    @RequestMapping("/user/add_car")
+    @RequestMapping(value = "/user/car", method = RequestMethod.POST)
     public ResponseEntity<ApiResponse<Object>> addCar(@RequestBody AddCarJson request) {
         User currentUser = securityService.getCurrentUser();
         Car car = new Car();
@@ -41,4 +42,9 @@ public class UserController extends ResponseCreator {
         carService.save(car);
         return createGoodResponse();
     }
+
+//    @RequestMapping(value = "/user/fill_data", method = RequestMethod.POST)
+//    public ResponseEntity<ApiResponse<Object>> fillData(){
+//
+//    }
 }
