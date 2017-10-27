@@ -10,6 +10,7 @@ import com.hackteam.dtp.util.ApiResponse;
 import com.hackteam.dtp.util.ResponseCreator;
 import com.hackteam.dtp.util.requests.AddCarJson;
 import com.hackteam.dtp.util.requests.FillUserDataJson;
+import io.swagger.annotations.ApiImplicitParam;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -29,6 +30,7 @@ public class UserController extends ResponseCreator {
     @Autowired
     UserService userService;
 
+    @ApiImplicitParam(name = "Authorization", paramType = "header", required = true, dataType = "string")
     @RequestMapping(value = "/user/car", method = RequestMethod.POST)
     public ResponseEntity<ApiResponse<String>> addCar(@RequestBody AddCarJson request) {
         try {
@@ -53,6 +55,7 @@ public class UserController extends ResponseCreator {
         return createGoodResponse();
     }
 
+    @ApiImplicitParam(name = "Authorization", paramType = "header", required = true, dataType = "string")
     @RequestMapping(value = "/user/fill_data", method = RequestMethod.POST)
     public ResponseEntity<ApiResponse<String>> fillData(@RequestBody FillUserDataJson request) {
         try {
