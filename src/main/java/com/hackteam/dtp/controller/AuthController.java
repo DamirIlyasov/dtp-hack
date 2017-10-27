@@ -39,7 +39,7 @@ public class AuthController extends ResponseCreator {
 
     @ApiOperation("Sign in")
     @RequestMapping(value = "/sign_in", method = RequestMethod.POST)
-    public ResponseEntity<ApiResponse<Object>> loginAndGetToken(@RequestBody RequestSignInJson requestSignInJson) {
+    public ResponseEntity<ApiResponse<String>> loginAndGetToken(@RequestBody RequestSignInJson requestSignInJson) {
 
         User user = userService.findOneByEmail(requestSignInJson.getEmail());
         if (user == null) {
@@ -54,10 +54,10 @@ public class AuthController extends ResponseCreator {
 
     @ApiOperation("Sign up")
     @RequestMapping(value = "/sign_up", method = RequestMethod.POST)
-    public ResponseEntity<ApiResponse<Object>> registerAndGetToken(@RequestBody RequestSignUpJson requestSignUpJson) {
+    public ResponseEntity<ApiResponse<String>> registerAndGetToken(@RequestBody RequestSignUpJson requestSignUpJson) {
         LOGGER.info("----------------------------------------------");
         LOGGER.info("RegistrationController: validation started...");
-        ResponseEntity<ApiResponse<Object>> response = validator.getRegistrationErrorResponse(requestSignUpJson);
+        ResponseEntity<ApiResponse<String>> response = validator.getRegistrationErrorResponse(requestSignUpJson);
         if (response != null) {
             LOGGER.info("RegistrationController: validation failed!");
             return response;

@@ -37,7 +37,7 @@ public class Validator extends ResponseCreator {
     }
 
 
-    public ResponseEntity<ApiResponse<Object>> getRegistrationErrorResponse(RequestSignUpJson requestSignUpJson
+    public ResponseEntity<ApiResponse<String>> getRegistrationErrorResponse(RequestSignUpJson requestSignUpJson
     ) {
 
         if (!this.isNameCorrect(requestSignUpJson.getFirstName())) {
