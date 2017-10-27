@@ -42,9 +42,9 @@ public class DtpApplication {
         user.setPassword(encoder.encode("123qwe123"));
         user.setFirstName("Damir");
         user.setLastName("Ilyasov");
+        user.setPassNumber("123123");
         userService.save(user);
         Car car = new Car();
-        car.setUser(user);
         car.setWhoGivedPts("Дамир,ёпта");
         car.setVinNumber("228");
         car.setPtsSerialNumber("1488");

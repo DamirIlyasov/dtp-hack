@@ -49,7 +49,6 @@ public class UserController extends ResponseCreator {
             car.setPtsSerialNumber(request.getPtsSerialNumber());
             car.setVinNumber(request.getVinNumber());
             car.setWhoGivedPts(request.getWhoGivedPts());
-            car.setUser(currentUser);
             carService.save(car);
         } catch (Exception e) {
             return createBadResponse(e.getMessage());

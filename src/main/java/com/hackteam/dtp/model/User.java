@@ -29,7 +29,7 @@ public class User extends AbstractEntity {
     private boolean verified;
     private String verificationCode;
     private int passwordRecoveryCode = 0;
-    @OneToMany(mappedBy = "user")
+    @OneToMany
     private List<Car> cars;
     private String licenseSerial;
     private String licenseNumber;
@@ -41,12 +41,21 @@ public class User extends AbstractEntity {
     private String citizenship;
     private String drivingExperience;
     private String passSeria;
+    private String passNumber;
     private Date passGettingDate;
     private String whoGivedPass;
     private String snils;
     private Boolean acceptPersonalDataTreatment;
     @ManyToMany
     private List<Dtp> dtps = new ArrayList<>();
+
+    public String getPassNumber() {
+        return passNumber;
+    }
+
+    public void setPassNumber(String passNumber) {
+        this.passNumber = passNumber;
+    }
 
     public List<Dtp> getDtps() {
         return dtps;

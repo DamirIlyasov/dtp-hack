@@ -1,7 +1,6 @@
 package com.hackteam.dtp.model;
 
 import javax.persistence.Entity;
-import javax.persistence.ManyToOne;
 import java.util.Date;
 
 @Entity
@@ -13,8 +12,6 @@ public class Dtp extends AbstractEntity {
     private boolean matherialDamageToTransportExceptAandB;
     private boolean matherialDamagToDifferentThinks;
     private String witnessesFullNameAndAdresses;
-    @ManyToOne
-    private User user;
     private boolean finished = false;
     private Double latitude;
     private Double longitude;
@@ -41,14 +38,6 @@ public class Dtp extends AbstractEntity {
 
     public void setFinished(boolean finished) {
         this.finished = finished;
-    }
-
-    public User getUser() {
-        return user;
-    }
-
-    public void setUser(User user) {
-        this.user = user;
     }
 
     public String getFullDtpPlace() {

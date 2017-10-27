@@ -41,7 +41,6 @@ public class DtpController extends ResponseCreator {
         dtp.setWitnessesFullNameAndAdresses(request.getWitnessesFullNameAndAdresses());
         dtp.setLatitude(request.getLatitude());
         dtp.setLongitude(request.getLongitude());
-        dtp.setUser(securityService.getCurrentUser());
         dtpService.save(dtp);
         for (SseEmitter e : MainController.emitters) {
             e.send(dtp);
