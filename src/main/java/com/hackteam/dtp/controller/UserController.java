@@ -56,7 +56,7 @@ public class UserController extends ResponseCreator {
     }
 
     @ApiImplicitParam(name = "Authorization", paramType = "header", required = true, dataType = "string")
-    @RequestMapping(value = "/user/fill_data", method = RequestMethod.POST)
+    @RequestMapping(value = "/user/data", method = RequestMethod.POST)
     public ResponseEntity<ApiResponse<String>> fillData(@RequestBody FillUserDataJson request) {
         try {
             User currentUser = securityService.getCurrentUser();
