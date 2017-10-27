@@ -33,7 +33,7 @@ public class UserController extends ResponseCreator {
     UserService userService;
 
     @ApiImplicitParam(name = "Authorization", paramType = "header", required = true, dataType = "string")
-    @RequestMapping(value = "/user/car", method = RequestMethod.POST)
+    @RequestMapping(value = "/user/cars", method = RequestMethod.POST)
     public ResponseEntity<ApiResponse<String>> addCar(@RequestBody AddCarJson request) {
         try {
             User currentUser = securityService.getCurrentUser();
