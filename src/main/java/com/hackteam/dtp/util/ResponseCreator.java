@@ -14,8 +14,8 @@ public abstract class ResponseCreator {
         return createGoodResponse(null);
     }
 
-    protected <T> ResponseEntity<ApiResponse<T>> createBadResponse(String error, HttpStatus status) {
-        return createResponse(null, error, status);
+    protected <T> ResponseEntity<ApiResponse<T>> createBadResponse(String error) {
+        return createResponse(null, error, HttpStatus.OK);
     }
 
     private <T> ResponseEntity<ApiResponse<T>> createResponse(T body, String error, HttpStatus status) {

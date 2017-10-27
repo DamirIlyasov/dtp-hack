@@ -5,7 +5,6 @@ import com.hackteam.dtp.util.requests.RequestSignUpJson;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Component;
 
@@ -43,38 +42,38 @@ public class Validator extends ResponseCreator {
 
         if (!this.isNameCorrect(requestSignUpJson.getFirstName())) {
             logger.warn("Validator: firstname " + requestSignUpJson.getFirstName() + " is incorrect!");
-            return createBadResponse("FirstName is incorrect", HttpStatus.OK);
+            return createBadResponse("FirstName is incorrect");
 
         }
         if (!this.isNameCorrect(requestSignUpJson.getLastName())) {
             logger.warn("Validator: Lastname " + requestSignUpJson.getLastName() + " is incorrect!");
-            return createBadResponse("LastName is incorrect", HttpStatus.OK);
+            return createBadResponse("LastName is incorrect");
         }
         if (requestSignUpJson.getMiddleName() != null && !"".equals(requestSignUpJson.getMiddleName())) {
             if (!isNameCorrect(requestSignUpJson.getMiddleName())) {
-                return createBadResponse("MiddleName is incorrect", HttpStatus.OK);
+                return createBadResponse("MiddleName is incorrect");
 
             }
         }
         if (!this.isEmailCorrect(requestSignUpJson.getEmail())) {
             logger.warn("Validator: Email " + requestSignUpJson.getEmail() + " is incorrect!");
-            return createBadResponse("Email is incorrect", HttpStatus.OK);
+            return createBadResponse("Email is incorrect");
         }
         if (this.isEmailAlreadyRegistered(requestSignUpJson.getEmail())) {
             logger.warn("Validator: User with this email " + requestSignUpJson.getEmail() + " already registered!");
-            return createBadResponse("User with this email already registered", HttpStatus.OK);
+            return createBadResponse("User with this email already registered");
         }
         if (!this.isPhoneCorrect(requestSignUpJson.getPhone())) {
             logger.warn("Validator: Phone " + requestSignUpJson.getPhone() + " is incorrect!");
-            return createBadResponse("Phone is incorrect", HttpStatus.OK);
+            return createBadResponse("Phone is incorrect");
         }
         if (this.isPhoneAlreadyRegistered(requestSignUpJson.getPhone())) {
             logger.warn("Validator: User with this phone " + requestSignUpJson.getPhone() + " already registered!");
-            return createBadResponse("User with this phone already registered", HttpStatus.OK);
+            return createBadResponse("User with this phone already registered");
         }
         if (!this.isPasswordCorrect(requestSignUpJson.getPassword())) {
             logger.warn("Validator: Password " + requestSignUpJson.getPassword() + " is incorrect!");
-            return createBadResponse("Password is incorrect", HttpStatus.OK);
+            return createBadResponse("Password is incorrect");
         }
 
         return null;

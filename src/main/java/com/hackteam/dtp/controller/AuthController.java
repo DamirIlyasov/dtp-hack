@@ -13,7 +13,6 @@ import io.swagger.annotations.ApiOperation;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -44,10 +43,10 @@ public class AuthController extends ResponseCreator {
 
         User user = userService.findOneByEmail(requestSignInJson.getEmail());
         if (user == null) {
-            return createBadResponse("Wrong email or password!", HttpStatus.BAD_REQUEST);
+            return createBadResponse("Wrong email or password!");
         }
         if (!encoder.matches(requestSignInJson.getPassword(), user.getPassword())) {
-            return createBadResponse("Wrong email or password!", HttpStatus.BAD_REQUEST);
+            return createBadResponse("Wrong email or password!");
         }
         String token = securityService.generateToken(requestSignInJson.getEmail(), requestSignInJson.getPassword());
         return createGoodResponse(token);
