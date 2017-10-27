@@ -18,6 +18,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.List;
+
 @RequestMapping("/secure/v1")
 @RestController
 public class UserController extends ResponseCreator {
@@ -80,4 +82,18 @@ public class UserController extends ResponseCreator {
         }
         return createGoodResponse();
     }
+
+    @ApiImplicitParam(name = "Authorization", paramType = "header", required = true, dataType = "string")
+    @RequestMapping(value = "/user/cars", method = RequestMethod.GET)
+    public ResponseEntity<ApiResponse<List<Car>>> getCars() {
+        return createGoodResponse(securityService.getCurrentUser().getCars());
+    }
+
+    @ApiImplicitParam(name = "Authorization", paramType = "header", required = true, dataType = "string")
+    @RequestMapping(value = "/user/user", method = RequestMethod.GET)
+    public ResponseEntity<ApiResponse<User>> getUser() {
+        return createGoodResponse(securityService.getCurrentUser());
+    }
+
+
 }
