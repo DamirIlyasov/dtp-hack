@@ -88,6 +88,7 @@ public class UserController extends ResponseCreator {
         try {
             return createGoodResponse(securityService.getCurrentUser().getCars());
         } catch (Exception e) {
+            e.printStackTrace();
             return createBadResponse(e.getMessage());
         }
     }
