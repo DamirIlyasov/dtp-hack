@@ -6,6 +6,7 @@ import com.hackteam.dtp.service.SecurityService;
 import com.hackteam.dtp.util.ApiResponse;
 import com.hackteam.dtp.util.ResponseCreator;
 import com.hackteam.dtp.util.requests.RegisterDtpJson;
+import io.swagger.annotations.ApiImplicitParam;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -27,6 +28,7 @@ public class DtpController extends ResponseCreator {
     @Autowired
     SecurityService securityService;
 
+    @ApiImplicitParam(name = "Authorization", paramType = "header", required = true, dataType = "string")
     @RequestMapping(value = "/dtp", method = RequestMethod.POST)
     public ResponseEntity<ApiResponse<String>> registerDtp(@RequestBody RegisterDtpJson request) throws IOException {
         Dtp dtp = new Dtp();
@@ -45,11 +47,15 @@ public class DtpController extends ResponseCreator {
         return createGoodResponse();
     }
 
+
+    @ApiImplicitParam(name = "Authorization", paramType = "header", required = true, dataType = "string")
     @RequestMapping(value = "/dtp/not_finished", method = RequestMethod.GET)
     public ResponseEntity<ApiResponse<List<Dtp>>> getAllNotFinishedDtp() {
         return createGoodResponse(dtpService.findAllByFinishedFalse());
     }
 
+
+    @ApiImplicitParam(name = "Authorization", paramType = "header", required = true, dataType = "string")
     @RequestMapping(value = "/dtp/finished", method = RequestMethod.GET)
     public ResponseEntity<ApiResponse<List<Dtp>>> getAllFinishedDtp() {
         return createGoodResponse(dtpService.findAllByFinishedTrue());
