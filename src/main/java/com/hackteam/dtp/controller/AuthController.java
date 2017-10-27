@@ -63,7 +63,6 @@ public class AuthController extends ResponseCreator {
             LOGGER.info("RegistrationController: validation failed!");
             return response;
         } else {
-//
             LOGGER.info("RegistrationController: validation success!");
             LOGGER.info("RegistrationController: new user saving...");
 

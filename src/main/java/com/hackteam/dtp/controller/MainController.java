@@ -23,7 +23,7 @@ public class MainController {
 
 
     @CrossOrigin
-    @RequestMapping("/sseTest")
+    @RequestMapping(value = "/sseTest", method = RequestMethod.GET)
     public ResponseBodyEmitter handleRequest() {
 
         final SseEmitter emitter = new SseEmitter();

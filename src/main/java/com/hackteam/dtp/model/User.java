@@ -5,14 +5,13 @@ import org.hibernate.validator.constraints.Email;
 import org.hibernate.validator.constraints.NotBlank;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
 @Table(name = "users")
-public class User {
+public class User extends AbstractEntity {
 
-    @Id
-    @GeneratedValue
-    private Long id;
+
     @NotBlank
     private String firstName;
     @NotBlank
@@ -28,13 +27,15 @@ public class User {
     private boolean verified;
     private String verificationCode;
     private int passwordRecoveryCode = 0;
+    @OneToMany(mappedBy = "user")
+    private List<Car> cars;
 
-    public Long getId() {
-        return id;
+    public List<Car> getCars() {
+        return cars;
     }
 
-    public void setId(Long id) {
-        this.id = id;
+    public void setCars(List<Car> cars) {
+        this.cars = cars;
     }
 
     public String getFirstName() {
