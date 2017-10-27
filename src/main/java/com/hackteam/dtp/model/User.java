@@ -5,6 +5,7 @@ import org.hibernate.validator.constraints.Email;
 import org.hibernate.validator.constraints.NotBlank;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -44,6 +45,16 @@ public class User extends AbstractEntity {
     private String whoGivedPass;
     private String snils;
     private Boolean acceptPersonalDataTreatment;
+    @ManyToMany
+    private List<Dtp> dtps = new ArrayList<>();
+
+    public List<Dtp> getDtps() {
+        return dtps;
+    }
+
+    public void setDtps(List<Dtp> dtps) {
+        this.dtps = dtps;
+    }
 
     public String getLicenseSerial() {
         return licenseSerial;

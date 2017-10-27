@@ -90,7 +90,7 @@ public class UserController extends ResponseCreator {
     }
 
     @ApiImplicitParam(name = "Authorization", paramType = "header", required = true, dataType = "string")
-    @RequestMapping(value = "/user/user", method = RequestMethod.GET)
+    @RequestMapping(value = "/user", method = RequestMethod.GET)
     public ResponseEntity<ApiResponse<User>> getUser() {
         return createGoodResponse(securityService.getCurrentUser());
     }
