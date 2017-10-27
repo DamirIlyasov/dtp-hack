@@ -85,7 +85,11 @@ public class UserController extends ResponseCreator {
     @ApiImplicitParam(name = "Authorization", paramType = "header", required = true, dataType = "string")
     @RequestMapping(value = "/user/cars", method = RequestMethod.GET)
     public ResponseEntity<ApiResponse<List<Car>>> getCars() {
-        return createGoodResponse(securityService.getCurrentUser().getCars());
+        try {
+            return createGoodResponse(securityService.getCurrentUser().getCars());
+        } catch (Exception e) {
+            return createBadResponse(e.getMessage());
+        }
     }
 
     @ApiImplicitParam(name = "Authorization", paramType = "header", required = true, dataType = "string")
