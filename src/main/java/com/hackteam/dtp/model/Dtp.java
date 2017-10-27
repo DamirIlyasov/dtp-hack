@@ -1,34 +1,36 @@
 package com.hackteam.dtp.model;
 
-import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
-import javax.persistence.ManyToMany;
-import java.util.ArrayList;
+import javax.persistence.ManyToOne;
 import java.util.Date;
-import java.util.List;
 
 @Entity
 public class Dtp extends AbstractEntity {
     private String fullDtpPlace;
     private Date date;
-    @ElementCollection
-    private List<String> usersNumbers = new ArrayList<>();
-    @ElementCollection
-    private List<String> usersCarsNumbers = new ArrayList<>();
     private int carCrashedCount;
     private int victimsNumbers;
     private boolean matherialDamageToTransportExceptAandB;
     private boolean matherialDamagToDifferentThinks;
     private String witnessesFullNameAndAdresses;
-    @ManyToMany
-    private List<User> users = new ArrayList<>();
+    @ManyToOne
+    private User user;
+    private boolean finished = false;
 
-    public List<User> getUsers() {
-        return users;
+    public boolean isFinished() {
+        return finished;
     }
 
-    public void setUsers(List<User> users) {
-        this.users = users;
+    public void setFinished(boolean finished) {
+        this.finished = finished;
+    }
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
     }
 
     public String getFullDtpPlace() {
@@ -45,22 +47,6 @@ public class Dtp extends AbstractEntity {
 
     public void setDate(Date date) {
         this.date = date;
-    }
-
-    public List<String> getUsersNumbers() {
-        return usersNumbers;
-    }
-
-    public void setUsersNumbers(List<String> usersNumbers) {
-        this.usersNumbers = usersNumbers;
-    }
-
-    public List<String> getUsersCarsNumbers() {
-        return usersCarsNumbers;
-    }
-
-    public void setUsersCarsNumbers(List<String> usersCarsNumbers) {
-        this.usersCarsNumbers = usersCarsNumbers;
     }
 
     public int getCarCrashedCount() {
