@@ -36,7 +36,6 @@ public class UserController extends ResponseCreator {
     @RequestMapping(value = "/user/cars", method = RequestMethod.POST)
     public ResponseEntity<ApiResponse<String>> addCar(@RequestBody AddCarJson request) {
         try {
-            User currentUser = securityService.getCurrentUser();
             Car car = new Car();
             car.setCarMark(request.getCarMark());
             car.setCarModel(request.getCarModel());
@@ -88,6 +87,13 @@ public class UserController extends ResponseCreator {
         try {
             return createGoodResponse(securityService.getCurrentUser().getCars());
         } catch (Exception e) {
+            System.out.println("ERRROROROOROROR");
+            System.out.println("ERRROROROOROROR");
+            System.out.println("ERRROROROOROROR");
+            System.out.println("ERRROROROOROROR");
+            System.out.println("ERRROROROOROROR");
+            System.out.println("ERRROROROOROROR");
+
             e.printStackTrace();
             return createBadResponse(e.getMessage());
         }

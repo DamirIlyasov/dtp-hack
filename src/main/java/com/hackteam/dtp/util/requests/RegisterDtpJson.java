@@ -12,6 +12,9 @@ public class RegisterDtpJson {
     private String witnessesFullNameAndAdresses;
     private Double latitude;
     private Double longitude;
+    private String secondUsersPhoneNumber;
+    private String secondUsersCarNumber;
+
 
     public Double getLatitude() {
         return latitude;
