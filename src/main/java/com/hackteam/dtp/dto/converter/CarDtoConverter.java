@@ -21,6 +21,7 @@ public class CarDtoConverter {
         carDto.setHorsePower(car.getHorsePower());
         carDto.setInsurancePolicyNumber(car.getInsurancePolicyNumber());
         carDto.setInsurancePolicySerial(car.getInsurancePolicySerial());
+        carDto.setPtsSerialNumber(car.getPtsSerialNumber());
         return carDto;
     }
 
