@@ -1,6 +1,7 @@
 package com.hackteam.dtp.controller;
 
 import com.hackteam.dtp.dto.DtpDto;
+import com.hackteam.dtp.dto.converter.DtpConverter;
 import com.hackteam.dtp.dto.converter.UserToDtoConverter;
 import com.hackteam.dtp.model.Car;
 import com.hackteam.dtp.model.Dtp;
@@ -43,9 +44,25 @@ public class DtpController extends ResponseCreator {
     @Autowired
     UserToDtoConverter userToDtoConverter;
 
+    @Autowired
+    DtpConverter dtpConverter;
+
     @ApiImplicitParam(name = "Authorization", paramType = "header", required = true, dataType = "string")
     @RequestMapping(value = "/dtp", method = RequestMethod.POST)
     public ResponseEntity<ApiResponse<String>> registerDtp(@RequestBody RegisterDtpJson request) throws IOException {
+        //first car
+        Car firstCar = carService.findOneByCarNumber(request.getFirstUserCarNumber());
+
+        User secondUser = userService.findOneByPhone(request.getSecondUsersPhoneNumber());
+        //second car
+        Car secondCar = new Car();
+        for (Car car : secondUser.getCars()) {
+            if (car.getCarNumber().equals(request.getSecondUsersCarNumber())) {
+                secondCar = car;
+            }
+        }
+
+        User firstUser = securityService.getCurrentUser();
         Dtp dtp = new Dtp();
         dtp.setFullDtpPlace(request.getFullDtpPlace());
         dtp.setDate(request.getDate());
@@ -56,41 +73,18 @@ public class DtpController extends ResponseCreator {
         dtp.setWitnessesFullNameAndAdresses(request.getWitnessesFullNameAndAdresses());
         dtp.setLatitude(request.getLatitude());
         dtp.setLongitude(request.getLongitude());
+        dtp.setFirstUser(firstUser);
+        dtp.setSecondUser(secondUser);
+        dtp.setFirstCar(firstCar);
+        dtp.setSecondCar(secondCar);
         dtpService.save(dtp);
 
 
-        //first car
-        Car firstCar = carService.findOneByCarNumber(request.getFirstUserCarNumber());
-
-        User secondUser = userService.findOneByPhone(request.getSecondUsersPhoneNumber());
-        //second car
-        Car secondCar;
-        for (Car car : secondUser.getCars()) {
-            if (car.getCarNumber().equals(request.getSecondUsersCarNumber())) {
-                secondCar = car;
-            }
-        }
-
-        User firstUser = securityService.getCurrentUser();
-
-
-        DtpDto dtpDto = new DtpDto();
-        dtpDto.setFullDtpPlace(dtp.getFullDtpPlace());
-        dtpDto.setDate(dtp.getDate());
-        dtpDto.setCarCrashedCount(dtp.getCarCrashedCount());
-        dtpDto.setVictimsNumbers(dtp.getVictimsNumbers());
-        dtpDto.setMatherialDamageToTransportExceptAandB(dtp.isMatherialDamageToTransportExceptAandB());
-        dtpDto.setMatherialDamagToDifferentThinks(dtp.isMatherialDamagToDifferentThinks());
-        dtpDto.setWitnessesFullNameAndAdresses(dtp.getWitnessesFullNameAndAdresses());
-        dtpDto.setLatitude(dtp.getLatitude());
-        dtpDto.setLongitude(dtp.getLongitude());
-        dtpDto.setFirstUser(userToDtoConverter.convert(firstUser));
-        dtpDto.setSecondUser(userToDtoConverter.convert(secondUser));
-
+        DtpDto dtpDto = dtpConverter.convert(dtp);
 
 
         for (SseEmitter e : MainController.emitters) {
-            e.send(dtp);
+            e.send(dtpDto);
         }
         return createGoodResponse();
     }
@@ -98,15 +92,15 @@ public class DtpController extends ResponseCreator {
 
     @ApiImplicitParam(name = "Authorization", paramType = "header", required = true, dataType = "string")
     @RequestMapping(value = "/dtp/not_finished", method = RequestMethod.GET)
-    public ResponseEntity<ApiResponse<List<Dtp>>> getAllNotFinishedDtp() {
-        return createGoodResponse(dtpService.findAllByFinishedFalse());
+    public ResponseEntity<ApiResponse<List<DtpDto>>> getAllNotFinishedDtp() {
+        return createGoodResponse(dtpConverter.convertList(dtpService.findAllByFinishedFalse()));
     }
 
 
     @ApiImplicitParam(name = "Authorization", paramType = "header", required = true, dataType = "string")
     @RequestMapping(value = "/dtp/finished", method = RequestMethod.GET)
-    public ResponseEntity<ApiResponse<List<Dtp>>> getAllFinishedDtp() {
-        return createGoodResponse(dtpService.findAllByFinishedTrue());
+    public ResponseEntity<ApiResponse<List<DtpDto>>> getAllFinishedDtp() {
+        return createGoodResponse(dtpConverter.convertList(dtpService.findAllByFinishedTrue()));
     }
 
 }

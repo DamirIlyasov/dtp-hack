@@ -2,9 +2,9 @@ package com.hackteam.dtp.dto.converter;
 
 import com.hackteam.dtp.dto.UserDto;
 import com.hackteam.dtp.model.User;
-import org.springframework.stereotype.Service;
+import org.springframework.stereotype.Component;
 
-@Service
+@Component
 public class UserToDtoConverter {
     public UserDto convert(User user) {
         UserDto userDto = new UserDto();
