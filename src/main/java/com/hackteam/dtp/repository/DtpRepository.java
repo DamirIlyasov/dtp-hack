@@ -13,6 +13,6 @@ public interface DtpRepository extends JpaRepository<Dtp, Long> {
 
     List<Dtp> findAllByFinishedTrue();
 
-    @Query(value = "SELECT * FROM Dtp where date > '27.10.2016'", nativeQuery = true)
+    @Query(value = "SELECT * FROM Dtp where date < CURRENT_DATE ", nativeQuery = true)
     List<Dtp> findAllByDate();
 }
