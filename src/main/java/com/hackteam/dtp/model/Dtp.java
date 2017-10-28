@@ -138,4 +138,20 @@ public class Dtp extends AbstractEntity {
     public void setWitnessesFullNameAndAdresses(String witnessesFullNameAndAdresses) {
         this.witnessesFullNameAndAdresses = witnessesFullNameAndAdresses;
     }
+
+    public Dtp(Date date, Double latitude, Double longitude) {
+        this.date = date;
+        this.latitude = latitude;
+        this.longitude = longitude;
+    }
+
+    public Dtp() {
+
+    }
+
+    public Dtp(Double latitude, Double longitude) {
+
+        this.latitude = latitude;
+        this.longitude = longitude;
+    }
 }

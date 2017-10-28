@@ -2,6 +2,7 @@ package com.hackteam.dtp.service;
 
 import com.hackteam.dtp.model.Dtp;
 
+import java.util.Date;
 import java.util.List;
 
 public interface DtpService {
@@ -10,6 +11,10 @@ public interface DtpService {
     List<Dtp> findAllByFinishedFalse();
 
     List<Dtp> findAllByFinishedTrue();
+
+    List<Dtp> getAll();
+
+    List<Dtp> getAllByDate();
 
     Dtp findOneById(Long id);
 }
