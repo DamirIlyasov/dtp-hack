@@ -1,12 +1,15 @@
 package com.hackteam.dtp.util;
 
+import com.hackteam.dtp.model.Car;
 import com.hackteam.dtp.model.Dtp;
+import com.hackteam.dtp.model.User;
 import com.hackteam.dtp.service.DtpService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import javax.annotation.PostConstruct;
 import java.util.Date;
+import java.util.List;
 import java.util.Random;
 
 /**
@@ -56,5 +59,25 @@ public class Generation {
             dtpService.save(new Dtp(new Date(), corda1 - random.nextDouble(), corda2 - random.nextDouble()));
         }
         hui.generateDangerousZones();
+    }
+
+    private List<User> generateAndGetRandomUser() {
+        return null;
+    }
+
+    private List<Car> generateAndGetRandomCars() {
+        return null;
+    }
+
+    private Date generateDate() {
+        return null;
+    }
+
+    private Long generateLatitude() {
+        return null;
+    }
+
+    private Long generateLongitud() {
+        return null;
     }
 }
