@@ -1,7 +1,7 @@
 package com.hackteam.dtp.model;
 
 import javax.persistence.Entity;
-import javax.persistence.OneToOne;
+import javax.persistence.ManyToOne;
 import java.util.Date;
 
 @Entity
@@ -36,14 +36,14 @@ public class Dtp extends AbstractEntity {
     private boolean finished = false;
     private Double latitude;
     private Double longitude;
-    @OneToOne
+    @ManyToOne
     private User firstUser;
-    @OneToOne
+    @ManyToOne
     private User secondUser;
 
-    @OneToOne
+    @ManyToOne
     private Car firstCar;
-    @OneToOne
+    @ManyToOne
     private Car secondCar;
 
 

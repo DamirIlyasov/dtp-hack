@@ -1,13 +1,6 @@
-package com.hackteam.dtp.model;
+package com.hackteam.dtp.dto;
 
-import javax.persistence.Entity;
-import javax.persistence.ManyToOne;
-
-@Entity
-public class Car extends AbstractEntity {
-
-    @ManyToOne
-    private User user;
+public class CarDto {
     private String carMark;
     private String carModel;
     private String carNumber;
@@ -19,14 +12,6 @@ public class Car extends AbstractEntity {
     private Integer horsePower;
     private String insurancePolicySerial;
     private String insurancePolicyNumber;
-
-    public User getUser() {
-        return user;
-    }
-
-    public void setUser(User user) {
-        this.user = user;
-    }
 
     public String getCarMark() {
         return carMark;

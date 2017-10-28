@@ -29,7 +29,7 @@ public class User extends AbstractEntity {
     private boolean verified;
     private String verificationCode;
     private int passwordRecoveryCode = 0;
-    @OneToMany
+    @OneToMany(mappedBy = "user")
     private List<Car> cars;
     private String licenseSerial;
     private String licenseNumber;

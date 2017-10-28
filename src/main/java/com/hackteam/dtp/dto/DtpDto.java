@@ -1,7 +1,5 @@
 package com.hackteam.dtp.dto;
 
-import com.hackteam.dtp.model.Car;
-
 import java.util.Date;
 
 public class DtpDto {
@@ -18,10 +16,26 @@ public class DtpDto {
     private Double longitude;
     private UserDto firstUser;
     private UserDto secondUser;
-    private Car firstCar;
-    private Car secondCar;
+    private CarDto firstCar;
+    private CarDto secondCar;
     private String firstUsersName;
     private String secondUsersName;
+
+    public CarDto getFirstCar() {
+        return firstCar;
+    }
+
+    public void setFirstCar(CarDto firstCar) {
+        this.firstCar = firstCar;
+    }
+
+    public CarDto getSecondCar() {
+        return secondCar;
+    }
+
+    public void setSecondCar(CarDto secondCar) {
+        this.secondCar = secondCar;
+    }
 
     public String getFirstUsersName() {
         return firstUsersName;
@@ -45,22 +59,6 @@ public class DtpDto {
 
     public void setId(Long id) {
         this.id = id;
-    }
-
-    public Car getFirstCar() {
-        return firstCar;
-    }
-
-    public void setFirstCar(Car firstCar) {
-        this.firstCar = firstCar;
-    }
-
-    public Car getSecondCar() {
-        return secondCar;
-    }
-
-    public void setSecondCar(Car secondCar) {
-        this.secondCar = secondCar;
     }
 
     public String getFullDtpPlace() {

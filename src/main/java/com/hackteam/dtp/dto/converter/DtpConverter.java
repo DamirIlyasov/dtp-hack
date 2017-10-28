@@ -13,6 +13,9 @@ public class DtpConverter {
     @Autowired
     UserToDtoConverter userToDtoConverter;
 
+    @Autowired
+    CarDtoConverter carDtoConverter;
+
     @Override
     public String toString() {
         return "DtpConverter{" +
@@ -22,6 +25,8 @@ public class DtpConverter {
 
     public DtpDto convert(Dtp dtp) {
         DtpDto dtpDto = new DtpDto();
+        dtpDto.setFirstCar(carDtoConverter.convert(dtp.getFirstCar()));
+        dtpDto.setSecondCar(carDtoConverter.convert(dtp.getSecondCar()));
         dtpDto.setId(dtp.getId());
         dtpDto.setFullDtpPlace(dtp.getFullDtpPlace());
         dtpDto.setDate(dtp.getDate());
@@ -43,8 +48,6 @@ public class DtpConverter {
             dtpDto.setSecondUsersName("Антонов Антон Дмитриевич");
         }
 
-        dtpDto.setFirstCar(dtp.getFirstCar());
-        dtpDto.setSecondCar(dtp.getSecondCar());
         return dtpDto;
     }
 

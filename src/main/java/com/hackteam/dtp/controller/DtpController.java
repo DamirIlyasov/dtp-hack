@@ -1,6 +1,7 @@
 package com.hackteam.dtp.controller;
 
 import com.hackteam.dtp.dto.DtpDto;
+import com.hackteam.dtp.dto.converter.CarDtoConverter;
 import com.hackteam.dtp.dto.converter.DtpConverter;
 import com.hackteam.dtp.dto.converter.UserToDtoConverter;
 import com.hackteam.dtp.model.Car;
@@ -44,6 +45,9 @@ public class DtpController extends ResponseCreator {
 
     @Autowired
     DangerousZoneService dangerousZoneService;
+
+    @Autowired
+    CarDtoConverter carDtoConverter;
 
     @ApiImplicitParam(name = "Authorization", paramType = "header", required = true, dataType = "string")
     @RequestMapping(value = "/dtp", method = RequestMethod.POST)
