@@ -36,9 +36,9 @@ public class DtpApplication {
     @PostConstruct
     public void createData() {
         Car car = new Car();
-        car.setWhoGivedPts("Дамир,ёпта");
-        car.setVinNumber("228");
-        car.setPtsSerialNumber("1488");
+        car.setWhoGivedPts("Дамир");
+        car.setVinNumber("123");
+        car.setPtsSerialNumber("441");
         car.setInsurancePolicySerial("2222");
         car.setInsurancePolicyNumber("55555");
         car.setPtsNumber("1233");
@@ -46,24 +46,11 @@ public class DtpApplication {
         car.setCarYearOfBuilding("1997");
         car.setCarModel("Opel");
         car.setCarMark("Astra");
-        car.setCarNumber("ЛО228Х116");
+        car.setCarNumber("ув218x116");
         carService.save(car);
-        Car car3 = new Car();
-        car3.setWhoGivedPts("Дамир,ёпта");
-        car3.setVinNumber("228");
-        car3.setPtsSerialNumber("1488");
-        car3.setInsurancePolicySerial("2222");
-        car3.setInsurancePolicyNumber("55555");
-        car3.setPtsNumber("1233");
-        car3.setHorsePower(900);
-        car3.setCarYearOfBuilding("1997");
-        car3.setCarModel("Opel");
-        car3.setCarMark("Astra");
-        car3.setCarNumber("Лe228Х116");
-        carService.save(car3);
 
 
-        Car car1 = carService.findOneByCarNumber("уа123Х116");
+        Car car1 = carService.findOneByCarNumber("ув218Х116");
         User user = new User();
         user.setAcceptPersonalDataTreatment(true);
         user.setPhone("89033885946");
