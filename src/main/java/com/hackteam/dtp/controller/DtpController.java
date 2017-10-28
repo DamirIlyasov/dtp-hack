@@ -4,12 +4,10 @@ import com.hackteam.dtp.dto.DtpDto;
 import com.hackteam.dtp.dto.converter.DtpConverter;
 import com.hackteam.dtp.dto.converter.UserToDtoConverter;
 import com.hackteam.dtp.model.Car;
+import com.hackteam.dtp.model.DangerousZones;
 import com.hackteam.dtp.model.Dtp;
 import com.hackteam.dtp.model.User;
-import com.hackteam.dtp.service.CarService;
-import com.hackteam.dtp.service.DtpService;
-import com.hackteam.dtp.service.SecurityService;
-import com.hackteam.dtp.service.UserService;
+import com.hackteam.dtp.service.*;
 import com.hackteam.dtp.util.ApiResponse;
 import com.hackteam.dtp.util.ResponseCreator;
 import com.hackteam.dtp.util.requests.RegisterDtpJson;
@@ -43,6 +41,9 @@ public class DtpController extends ResponseCreator {
 
     @Autowired
     DtpConverter dtpConverter;
+
+    @Autowired
+    DangerousZoneService dangerousZoneService;
 
     @ApiImplicitParam(name = "Authorization", paramType = "header", required = true, dataType = "string")
     @RequestMapping(value = "/dtp", method = RequestMethod.POST)
@@ -106,4 +107,11 @@ public class DtpController extends ResponseCreator {
     public ResponseEntity<ApiResponse<DtpDto>> getDtpBuId(@RequestParam("id") Long id) {
         return createGoodResponse(dtpConverter.convert(dtpService.findOneById(id)));
     }
+
+    @ApiImplicitParam(name = "Authorization", paramType = "header", required = true, dataType = "string")
+    @RequestMapping(value = "/dangerous", method = RequestMethod.GET)
+    public ResponseEntity<ApiResponse<List<DangerousZones>>> getDangerousZones() {
+        return createGoodResponse(dangerousZoneService.getAll());
+    }
+
 }

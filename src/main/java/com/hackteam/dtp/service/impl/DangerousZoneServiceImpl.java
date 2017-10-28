@@ -6,6 +6,8 @@ import com.hackteam.dtp.service.DangerousZoneService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 /**
  * Created by Dmitry on 27.10.2017.
  */
@@ -19,5 +21,10 @@ public class DangerousZoneServiceImpl implements DangerousZoneService {
     @Override
     public void add(DangerousZones dangerousZones) {
         dangerousZoneRepository.save(dangerousZones);
+    }
+
+    @Override
+    public List<DangerousZones> getAll() {
+        return dangerousZoneRepository.findAll();
     }
 }
