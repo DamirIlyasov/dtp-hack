@@ -27,4 +27,9 @@ public class DtpServiceImpl implements DtpService {
     public List<Dtp> findAllByFinishedTrue() {
         return dtpRepository.findAllByFinishedTrue();
     }
+
+    @Override
+    public Dtp findOneById(Long id) {
+        return dtpRepository.findOne(id);
+    }
 }

@@ -16,10 +16,7 @@ import com.hackteam.dtp.util.requests.RegisterDtpJson;
 import io.swagger.annotations.ApiImplicitParam;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.method.annotation.SseEmitter;
 
 import java.io.IOException;
@@ -101,6 +98,12 @@ public class DtpController extends ResponseCreator {
     @RequestMapping(value = "/dtp/finished", method = RequestMethod.GET)
     public ResponseEntity<ApiResponse<List<DtpDto>>> getAllFinishedDtp() {
         return createGoodResponse(dtpConverter.convertList(dtpService.findAllByFinishedTrue()));
+
     }
 
+    @ApiImplicitParam(name = "Authorization", paramType = "header", required = true, dataType = "string")
+    @RequestMapping(value = "/dtp", method = RequestMethod.GET)
+    public ResponseEntity<ApiResponse<DtpDto>> getDtpBuId(@RequestParam("id") Long id) {
+        return createGoodResponse(dtpConverter.convert(dtpService.findOneById(id)));
+    }
 }

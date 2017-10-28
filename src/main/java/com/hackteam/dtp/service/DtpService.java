@@ -10,4 +10,6 @@ public interface DtpService {
     List<Dtp> findAllByFinishedFalse();
 
     List<Dtp> findAllByFinishedTrue();
+
+    Dtp findOneById(Long id);
 }
