@@ -15,4 +15,9 @@ public class CarServiceImpl implements CarService {
     public void save(Car car) {
         carRepository.save(car);
     }
+
+    @Override
+    public Car findOneByCarNumber(String carNumber) {
+        return carRepository.findOneByCarNumber(carNumber);
+    }
 }

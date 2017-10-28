@@ -11,7 +11,9 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
 import javax.annotation.PostConstruct;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 @SpringBootApplication
 public class DtpApplication {
@@ -28,6 +30,20 @@ public class DtpApplication {
 
     @PostConstruct
     public void createData() {
+        Car car = new Car();
+        car.setWhoGivedPts("Дамир,ёпта");
+        car.setVinNumber("228");
+        car.setPtsSerialNumber("1488");
+        car.setInsurancePolicySerial("2222");
+        car.setInsurancePolicyNumber("55555");
+        car.setPtsNumber("1233");
+        car.setHorsePower(900);
+        car.setCarYearOfBuilding("1997");
+        car.setCarModel("Opel");
+        car.setCarMark("Astra");
+        car.setCarNumber("ЛО228Х116");
+        carService.save(car);
+        Car car1 = carService.findOneByCarNumber("ЛО228Х116");
         User user = new User();
         user.setAcceptPersonalDataTreatment(true);
         user.setSnils("123123");
@@ -43,19 +59,9 @@ public class DtpApplication {
         user.setFirstName("Damir");
         user.setLastName("Ilyasov");
         user.setPassNumber("123123");
+        List<Car> cars = new ArrayList<>();
+        cars.add(car1);
+        user.setCars(cars);
         userService.save(user);
-        Car car = new Car();
-        car.setWhoGivedPts("Дамир,ёпта");
-        car.setVinNumber("228");
-        car.setPtsSerialNumber("1488");
-        car.setInsurancePolicySerial("2222");
-        car.setInsurancePolicyNumber("55555");
-        car.setPtsNumber("1233");
-        car.setHorsePower(900);
-        car.setCarYearOfBuilding("1997");
-        car.setCarModel("Opel");
-        car.setCarMark("Astra");
-        car.setCarNumber("ЛО228Х116");
-        carService.save(car);
     }
 }

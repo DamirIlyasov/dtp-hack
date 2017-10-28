@@ -1,5 +1,6 @@
 package com.hackteam.dtp.controller;
 
+import com.hackteam.dtp.dto.DtpDto;
 import com.hackteam.dtp.model.Dtp;
 import com.hackteam.dtp.service.DtpService;
 import com.hackteam.dtp.service.SecurityService;
@@ -42,6 +43,20 @@ public class DtpController extends ResponseCreator {
         dtp.setLatitude(request.getLatitude());
         dtp.setLongitude(request.getLongitude());
         dtpService.save(dtp);
+
+
+        DtpDto dtpDto = new DtpDto();
+        dtpDto.setFullDtpPlace(dtp.getFullDtpPlace());
+        dtpDto.setDate(dtp.getDate());
+        dtpDto.setCarCrashedCount(dtp.getCarCrashedCount());
+        dtpDto.setVictimsNumbers(dtp.getVictimsNumbers());
+        dtpDto.setMatherialDamageToTransportExceptAandB(dtp.isMatherialDamageToTransportExceptAandB());
+        dtpDto.setMatherialDamagToDifferentThinks(dtp.isMatherialDamagToDifferentThinks());
+        dtpDto.setWitnessesFullNameAndAdresses(dtp.getWitnessesFullNameAndAdresses());
+        dtpDto.setLatitude(dtp.getLatitude());
+        dtpDto.setLongitude(dtp.getLongitude());
+
+
         for (SseEmitter e : MainController.emitters) {
             e.send(dtp);
         }

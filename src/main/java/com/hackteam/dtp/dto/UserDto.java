@@ -23,7 +23,6 @@ public class UserDto {
     private Date passGettingDate;
     private String whoGivedPass;
     private String snils;
-    private Boolean acceptPersonalDataTreatment;
 
     public String getFirstName() {
         return firstName;
@@ -183,13 +182,5 @@ public class UserDto {
 
     public void setSnils(String snils) {
         this.snils = snils;
-    }
-
-    public Boolean getAcceptPersonalDataTreatment() {
-        return acceptPersonalDataTreatment;
-    }
-
-    public void setAcceptPersonalDataTreatment(Boolean acceptPersonalDataTreatment) {
-        this.acceptPersonalDataTreatment = acceptPersonalDataTreatment;
     }
 }
