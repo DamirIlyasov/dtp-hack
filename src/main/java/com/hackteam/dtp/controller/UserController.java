@@ -1,6 +1,8 @@
 package com.hackteam.dtp.controller;
 
 
+import com.hackteam.dtp.dto.UserDto;
+import com.hackteam.dtp.dto.converter.UserToDtoConverter;
 import com.hackteam.dtp.model.Car;
 import com.hackteam.dtp.model.User;
 import com.hackteam.dtp.service.CarService;
@@ -31,6 +33,9 @@ public class UserController extends ResponseCreator {
 
     @Autowired
     UserService userService;
+
+    @Autowired
+    UserToDtoConverter userToDtoConverter;
 
     @ApiImplicitParam(name = "Authorization", paramType = "header", required = true, dataType = "string")
     @RequestMapping(value = "/user/cars", method = RequestMethod.POST)
@@ -102,8 +107,8 @@ public class UserController extends ResponseCreator {
 
     @ApiImplicitParam(name = "Authorization", paramType = "header", required = true, dataType = "string")
     @RequestMapping(value = "/user", method = RequestMethod.GET)
-    public ResponseEntity<ApiResponse<User>> getUser() {
-        return createGoodResponse(securityService.getCurrentUser());
+    public ResponseEntity<ApiResponse<UserDto>> getUser() {
+        return createGoodResponse(userToDtoConverter.convert(securityService.getCurrentUser()));
     }
 
 
