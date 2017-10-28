@@ -1,7 +1,9 @@
 package com.hackteam.dtp.controller;
 
 
+import com.hackteam.dtp.dto.CarDto;
 import com.hackteam.dtp.dto.UserDto;
+import com.hackteam.dtp.dto.converter.CarDtoConverter;
 import com.hackteam.dtp.dto.converter.UserToDtoConverter;
 import com.hackteam.dtp.model.Car;
 import com.hackteam.dtp.model.User;
@@ -36,6 +38,9 @@ public class UserController extends ResponseCreator {
 
     @Autowired
     UserToDtoConverter userToDtoConverter;
+
+    @Autowired
+    CarDtoConverter carDtoConverter;
 
     @ApiImplicitParam(name = "Authorization", paramType = "header", required = true, dataType = "string")
     @RequestMapping(value = "/user/cars", method = RequestMethod.POST)
@@ -95,9 +100,10 @@ public class UserController extends ResponseCreator {
 
     @ApiImplicitParam(name = "Authorization", paramType = "header", required = true, dataType = "string")
     @RequestMapping(value = "/user/cars", method = RequestMethod.GET)
-    public ResponseEntity<ApiResponse<List<Car>>> getCars() {
+    public ResponseEntity<ApiResponse<List<CarDto>>> getCars() {
         try {
-            return createGoodResponse(securityService.getCurrentUser().getCars());
+
+            return createGoodResponse(carDtoConverter.convertList(securityService.getCurrentUser().getCars()));
         } catch (Exception e) {
             System.out.println("ERRROROROOROROR");
             System.out.println("ERRROROROOROROR");
