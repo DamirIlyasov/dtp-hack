@@ -82,6 +82,10 @@ public class UserController extends ResponseCreator {
             currentUser.setAcceptPersonalDataTreatment(request.getAcceptPersonalDataTreatment());
             userService.save(currentUser);
         } catch (Exception e) {
+            System.out.println("EERROROREOQEREQODDAADF");
+            System.out.println("EERROROREOQEREQODDAADF");
+            System.out.println("EERROROREOQEREQODDAADF");
+            System.out.println("EERROROREOQEREQODDAADF");
             return createBadResponse(e.getMessage());
         }
         return createGoodResponse();
