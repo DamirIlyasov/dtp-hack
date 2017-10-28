@@ -42,7 +42,7 @@ public class JWTFilter extends GenericFilterBean {
         try {
             String stringToken = req.getHeader("Authorization");
             if (stringToken == null) {
-                ((HttpServletResponse) response).sendError(913, "Authorization header not found");
+                ((HttpServletResponse) response).sendError(HttpServletResponse.SC_OK, "Authorization header not found");
                 throw new InsufficientAuthenticationException("Authorization header not found");
             }
             try {
@@ -50,13 +50,14 @@ public class JWTFilter extends GenericFilterBean {
                 JWTToken token = new JWTToken(jwt);
                 Authentication auth = authenticationManager.authenticate(token);
                 if (!auth.isAuthenticated()) {
-                    ((HttpServletResponse) response).sendError(913, "Wrong token");
+                    ((HttpServletResponse) response).sendError(HttpServletResponse.SC_OK, "Wrong token");
                 } else {
                     SecurityContextHolder.getContext().setAuthentication(auth);
                     chain.doFilter(request, response);
                 }
             } catch (ParseException e) {
-                ((HttpServletResponse) response).sendError(914, "Wrong token");
+                ((HttpServletResponse) response).sendError(HttpServletResponse.SC_OK, "Wrong token");
+//                ((HttpServletResponse) response).sendError(914, "Wrong token");
             }
         } catch (AuthenticationException e) {
             SecurityContextHolder.clearContext();
