@@ -58,6 +58,7 @@ public class UserController extends ResponseCreator {
             User user = securityService.getCurrentUser();
             List<Car> cars = new ArrayList<>();
             cars.add(carService.findOneByCarNumber(request.getCarNumber()));
+            user.setCars(cars);
             userService.save(user);
         } catch (Exception e) {
             return createBadResponse(e.getMessage());
