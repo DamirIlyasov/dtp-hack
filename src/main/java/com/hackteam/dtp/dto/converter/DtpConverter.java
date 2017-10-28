@@ -25,8 +25,17 @@ public class DtpConverter {
         dtpDto.setWitnessesFullNameAndAdresses(dtp.getWitnessesFullNameAndAdresses());
         dtpDto.setLatitude(dtp.getLatitude());
         dtpDto.setLongitude(dtp.getLongitude());
-        dtpDto.setFirstUser(userToDtoConverter.convert(dtp.getFirstUser()));
-        dtpDto.setSecondUser(userToDtoConverter.convert(dtp.getFirstUser()));
+        try {
+            dtpDto.setFirstUser(userToDtoConverter.convert(dtp.getFirstUser()));
+            dtpDto.setSecondUser(userToDtoConverter.convert(dtp.getFirstUser()));
+        } catch (Exception e) {
+            dtpDto.setFirstUser(null);
+            dtpDto.setSecondUser(null);
+        } finally {
+            dtpDto.setFirstUsersName("Иванов Иван Иванович");
+            dtpDto.setSecondUsersName("Антонов Антон Дмитриевич");
+        }
+
         dtpDto.setFirstCar(dtp.getFirstCar());
         dtpDto.setSecondCar(dtp.getSecondCar());
         return dtpDto;

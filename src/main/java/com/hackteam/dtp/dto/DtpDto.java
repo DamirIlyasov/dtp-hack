@@ -20,6 +20,24 @@ public class DtpDto {
     private UserDto secondUser;
     private Car firstCar;
     private Car secondCar;
+    private String firstUsersName;
+    private String secondUsersName;
+
+    public String getFirstUsersName() {
+        return firstUsersName;
+    }
+
+    public void setFirstUsersName(String firstUsersName) {
+        this.firstUsersName = firstUsersName;
+    }
+
+    public String getSecondUsersName() {
+        return secondUsersName;
+    }
+
+    public void setSecondUsersName(String secondUsersName) {
+        this.secondUsersName = secondUsersName;
+    }
 
     public Long getId() {
         return id;

@@ -20,6 +20,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @RequestMapping("/secure/v1")
@@ -54,6 +55,11 @@ public class UserController extends ResponseCreator {
             car.setVinNumber(request.getVinNumber());
             car.setWhoGivedPts(request.getWhoGivedPts());
             carService.save(car);
+            User user = securityService.getCurrentUser();
+            List<Car> cars = new ArrayList<>();
+            cars.add(carService.findOneByCarNumber(request.getCarNumber()));
+            user.setCars(cars);
+            userService.save(user);
         } catch (Exception e) {
             return createBadResponse(e.getMessage());
         }
@@ -79,6 +85,7 @@ public class UserController extends ResponseCreator {
             currentUser.setPassGettingDate(request.getPassGettingDate());
             currentUser.setWhoGivedPass(request.getWhoGivedPass());
             currentUser.setSnils(request.getSnils());
+            currentUser.setPassNumber(request.getPassNumber());
             currentUser.setAcceptPersonalDataTreatment(request.getAcceptPersonalDataTreatment());
             userService.save(currentUser);
         } catch (Exception e) {
