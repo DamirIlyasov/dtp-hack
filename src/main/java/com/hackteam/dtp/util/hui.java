@@ -55,7 +55,7 @@ public class hui {
             findRealCenter(newCurrCenter, this.dtpList, radius);
         } else {
             this.dtpList.removeAll(dtpInRadius);
-            if (dtpInRadius.size() / 30 > 1 / 7) {
+            if (dtpInRadius.size() / 30 > 1 / 10) {
                 dangerousZoneService.add(new DangerousZones(currCenter.getLatitude(), currCenter.getLongitude(), 50.0));
             }
         }

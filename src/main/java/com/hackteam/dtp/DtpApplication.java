@@ -94,6 +94,8 @@ public class DtpApplication {
         dtp.setFullDtpPlace("У Лии дома");
         dtp.setFirstUser(userService.findOneByEmail("adminadmin@gmail.com"));
         dtp.setSecondUser(userService.findOneByEmail("adminadmin@gmail.com"));
+        dtp.setLatitude(55.76672);
+        dtp.setLongitude(49.180016);
         dtpService.save(dtp);
     }
 }
