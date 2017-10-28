@@ -5,7 +5,6 @@ import com.hackteam.dtp.service.DtpService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import javax.annotation.PostConstruct;
 import java.util.Date;
 import java.util.Random;
 
@@ -19,7 +18,6 @@ public class Generation {
     @Autowired
     DtpService dtpService;
 
-    @PostConstruct
     private void main() {
         double corda1 = 55.787822;
         double corda2 = 49.123248;
