@@ -56,34 +56,34 @@ public class DtpController extends ResponseCreator {
         Car secondCar = new Car();
         for (Car car : secondUser.getCars()) {
             if (car.getCarNumber().equals(request.getSecondUsersCarNumber())) {
-                secondCar = car;
+                User firstUser = securityService.getCurrentUser();
+                Dtp dtp = new Dtp();
+                dtp.setFullDtpPlace(request.getFullDtpPlace());
+                dtp.setDate(request.getDate());
+                dtp.setCarCrashedCount(request.getCarCrashedCount());
+                dtp.setVictimsNumbers(request.getVictimsNumbers());
+                dtp.setMatherialDamageToTransportExceptAandB(request.isMatherialDamageToTransportExceptAandB());
+                dtp.setMatherialDamagToDifferentThinks(request.isMatherialDamagToDifferentThinks());
+                dtp.setWitnessesFullNameAndAdresses(request.getWitnessesFullNameAndAdresses());
+                dtp.setLatitude(request.getLatitude());
+                dtp.setLongitude(request.getLongitude());
+                dtp.setFirstUser(firstUser);
+                dtp.setSecondUser(secondUser);
+                dtp.setFirstCar(firstCar);
+                dtp.setSecondCar(car);
+                dtpService.save(dtp);
+
+
+                DtpDto dtpDto = dtpConverter.convert(dtp);
+
+
+                for (SseEmitter e : MainController.emitters) {
+                    e.send(dtpDto);
+                }
             }
         }
 
-        User firstUser = securityService.getCurrentUser();
-        Dtp dtp = new Dtp();
-        dtp.setFullDtpPlace(request.getFullDtpPlace());
-        dtp.setDate(request.getDate());
-        dtp.setCarCrashedCount(request.getCarCrashedCount());
-        dtp.setVictimsNumbers(request.getVictimsNumbers());
-        dtp.setMatherialDamageToTransportExceptAandB(request.isMatherialDamageToTransportExceptAandB());
-        dtp.setMatherialDamagToDifferentThinks(request.isMatherialDamagToDifferentThinks());
-        dtp.setWitnessesFullNameAndAdresses(request.getWitnessesFullNameAndAdresses());
-        dtp.setLatitude(request.getLatitude());
-        dtp.setLongitude(request.getLongitude());
-        dtp.setFirstUser(firstUser);
-        dtp.setSecondUser(secondUser);
-        dtp.setFirstCar(firstCar);
-        dtp.setSecondCar(secondCar);
-        dtpService.save(dtp);
 
-
-        DtpDto dtpDto = dtpConverter.convert(dtp);
-
-
-        for (SseEmitter e : MainController.emitters) {
-            e.send(dtpDto);
-        }
         return createGoodResponse();
     }
 
@@ -117,7 +117,11 @@ public class DtpController extends ResponseCreator {
     @ApiImplicitParam(name = "Authorization", paramType = "header", required = true, dataType = "string")
     @RequestMapping(value = "/dtp/last", method = RequestMethod.GET)
     public ResponseEntity<ApiResponse<List<DtpDto>>> lastDtp() {
-        return createGoodResponse(dtpConverter.convertList(dtpService.getLast()));
+        List<Dtp> last = dtpService.getLast();
+        System.out.println("LAST:" + last.toString());
+        List<DtpDto> dtos = dtpConverter.convertList(dtpService.getLast());
+        System.out.println();
+        return createGoodResponse(dtos);
     }
 
     @ApiImplicitParam(name = "Authorization", paramType = "header", required = true, dataType = "string")

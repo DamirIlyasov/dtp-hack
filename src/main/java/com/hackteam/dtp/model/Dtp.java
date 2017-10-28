@@ -6,6 +6,26 @@ import java.util.Date;
 
 @Entity
 public class Dtp extends AbstractEntity {
+    @Override
+    public String toString() {
+        return "Dtp{" +
+                "fullDtpPlace='" + fullDtpPlace + '\'' +
+                ", date=" + date +
+                ", carCrashedCount=" + carCrashedCount +
+                ", victimsNumbers=" + victimsNumbers +
+                ", matherialDamageToTransportExceptAandB=" + matherialDamageToTransportExceptAandB +
+                ", matherialDamagToDifferentThinks=" + matherialDamagToDifferentThinks +
+                ", witnessesFullNameAndAdresses='" + witnessesFullNameAndAdresses + '\'' +
+                ", finished=" + finished +
+                ", latitude=" + latitude +
+                ", longitude=" + longitude +
+                ", firstUser=" + firstUser +
+                ", secondUser=" + secondUser +
+                ", firstCar=" + firstCar +
+                ", secondCar=" + secondCar +
+                '}';
+    }
+
     private String fullDtpPlace;
     private Date date;
     private int carCrashedCount;

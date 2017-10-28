@@ -13,6 +13,13 @@ public class DtpConverter {
     @Autowired
     UserToDtoConverter userToDtoConverter;
 
+    @Override
+    public String toString() {
+        return "DtpConverter{" +
+                "userToDtoConverter=" + userToDtoConverter +
+                '}';
+    }
+
     public DtpDto convert(Dtp dtp) {
         DtpDto dtpDto = new DtpDto();
         dtpDto.setId(dtp.getId());
