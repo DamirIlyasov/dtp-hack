@@ -88,6 +88,8 @@ public class DtpApplication {
         Dtp dtp = new Dtp();
         dtp.setFirstCar(car1);
         dtp.setSecondCar(car2);
+        dtp.setDate(new Date());
+        dtp.setFullDtpPlace("У Лии дома");
         dtp.setFirstUser(userService.findOneByEmail("adminadmin@gmail.com"));
         dtp.setSecondUser(userService.findOneByEmail("adminadmin@gmail.com"));
         dtpService.save(dtp);
