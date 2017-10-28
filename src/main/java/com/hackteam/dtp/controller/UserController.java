@@ -20,7 +20,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.util.ArrayList;
 import java.util.List;
 
 @RequestMapping("/secure/v1")
@@ -54,12 +53,8 @@ public class UserController extends ResponseCreator {
             car.setPtsSerialNumber(request.getPtsSerialNumber());
             car.setVinNumber(request.getVinNumber());
             car.setWhoGivedPts(request.getWhoGivedPts());
+            car.setUser(securityService.getCurrentUser());
             carService.save(car);
-            User user = securityService.getCurrentUser();
-            List<Car> cars = new ArrayList<>();
-            cars.add(carService.findOneByCarNumber(request.getCarNumber()));
-            user.setCars(cars);
-            userService.save(user);
         } catch (Exception e) {
             return createBadResponse(e.getMessage());
         }
