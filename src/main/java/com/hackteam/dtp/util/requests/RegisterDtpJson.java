@@ -12,9 +12,33 @@ public class RegisterDtpJson {
     private String witnessesFullNameAndAdresses;
     private Double latitude;
     private Double longitude;
+    private String firstUserCarNumber;
     private String secondUsersPhoneNumber;
     private String secondUsersCarNumber;
 
+    public String getFirstUserCarNumber() {
+        return firstUserCarNumber;
+    }
+
+    public void setFirstUserCarNumber(String firstUserCarNumber) {
+        this.firstUserCarNumber = firstUserCarNumber;
+    }
+
+    public String getSecondUsersPhoneNumber() {
+        return secondUsersPhoneNumber;
+    }
+
+    public void setSecondUsersPhoneNumber(String secondUsersPhoneNumber) {
+        this.secondUsersPhoneNumber = secondUsersPhoneNumber;
+    }
+
+    public String getSecondUsersCarNumber() {
+        return secondUsersCarNumber;
+    }
+
+    public void setSecondUsersCarNumber(String secondUsersCarNumber) {
+        this.secondUsersCarNumber = secondUsersCarNumber;
+    }
 
     public Double getLatitude() {
         return latitude;

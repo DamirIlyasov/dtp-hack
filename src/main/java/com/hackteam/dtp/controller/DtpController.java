@@ -1,9 +1,14 @@
 package com.hackteam.dtp.controller;
 
 import com.hackteam.dtp.dto.DtpDto;
+import com.hackteam.dtp.dto.converter.UserToDtoConverter;
+import com.hackteam.dtp.model.Car;
 import com.hackteam.dtp.model.Dtp;
+import com.hackteam.dtp.model.User;
+import com.hackteam.dtp.service.CarService;
 import com.hackteam.dtp.service.DtpService;
 import com.hackteam.dtp.service.SecurityService;
+import com.hackteam.dtp.service.UserService;
 import com.hackteam.dtp.util.ApiResponse;
 import com.hackteam.dtp.util.ResponseCreator;
 import com.hackteam.dtp.util.requests.RegisterDtpJson;
@@ -27,7 +32,16 @@ public class DtpController extends ResponseCreator {
     DtpService dtpService;
 
     @Autowired
+    CarService carService;
+
+    @Autowired
     SecurityService securityService;
+
+    @Autowired
+    UserService userService;
+
+    @Autowired
+    UserToDtoConverter userToDtoConverter;
 
     @ApiImplicitParam(name = "Authorization", paramType = "header", required = true, dataType = "string")
     @RequestMapping(value = "/dtp", method = RequestMethod.POST)
@@ -45,6 +59,21 @@ public class DtpController extends ResponseCreator {
         dtpService.save(dtp);
 
 
+        //first car
+        Car firstCar = carService.findOneByCarNumber(request.getFirstUserCarNumber());
+
+        User secondUser = userService.findOneByPhone(request.getSecondUsersPhoneNumber());
+        //second car
+        Car secondCar;
+        for (Car car : secondUser.getCars()) {
+            if (car.getCarNumber().equals(request.getSecondUsersCarNumber())) {
+                secondCar = car;
+            }
+        }
+
+        User firstUser = securityService.getCurrentUser();
+
+
         DtpDto dtpDto = new DtpDto();
         dtpDto.setFullDtpPlace(dtp.getFullDtpPlace());
         dtpDto.setDate(dtp.getDate());
@@ -55,6 +84,9 @@ public class DtpController extends ResponseCreator {
         dtpDto.setWitnessesFullNameAndAdresses(dtp.getWitnessesFullNameAndAdresses());
         dtpDto.setLatitude(dtp.getLatitude());
         dtpDto.setLongitude(dtp.getLongitude());
+        dtpDto.setFirstUser(userToDtoConverter.convert(firstUser));
+        dtpDto.setSecondUser(userToDtoConverter.convert(secondUser));
+
 
 
         for (SseEmitter e : MainController.emitters) {

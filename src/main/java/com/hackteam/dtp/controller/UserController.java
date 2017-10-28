@@ -60,6 +60,7 @@ public class UserController extends ResponseCreator {
     public ResponseEntity<ApiResponse<String>> fillData(@RequestBody FillUserDataJson request) {
         try {
             User currentUser = securityService.getCurrentUser();
+            currentUser.setPassNumber(request.getPassNumber());
             currentUser.setLicenseSerial(request.getLicenseSerial());
             currentUser.setLicenseNumber(request.getLicenseNumber());
             currentUser.setInn(request.getInn());
