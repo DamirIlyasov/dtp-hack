@@ -25,8 +25,8 @@ public class DtpConverter {
 
     public DtpDto convert(Dtp dtp) {
         DtpDto dtpDto = new DtpDto();
-        dtpDto.setFirstCar(carDtoConverter.convert(dtp.getFirstCar()));
-        dtpDto.setSecondCar(carDtoConverter.convert(dtp.getSecondCar()));
+//        dtpDto.setFirstCar(carDtoConverter.convert(dtp.getFirstCar()));
+//        dtpDto.setSecondCar(carDtoConverter.convert(dtp.getSecondCar()));
         dtpDto.setId(dtp.getId());
         dtpDto.setFullDtpPlace(dtp.getFullDtpPlace());
         dtpDto.setDate(dtp.getDate());

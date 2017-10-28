@@ -65,31 +65,24 @@ public class DtpController extends ResponseCreator {
             System.out.println(secondUser.toString());
             System.out.println("--------------------------------");
 
-            //second car
-            for (Car car : secondUser.getCars()) {
-                if (car.getCarNumber().equals(request.getSecondUsersCarNumber())) {
-                    User firstUser = securityService.getCurrentUser();
-                    Dtp dtp = new Dtp();
-                    dtp.setFullDtpPlace(request.getFullDtpPlace());
-                    dtp.setDate(request.getDate());
-                    dtp.setCarCrashedCount(request.getCarCrashedCount());
-                    dtp.setVictimsNumbers(request.getVictimsNumbers());
-                    dtp.setMatherialDamageToTransportExceptAandB(request.isMatherialDamageToTransportExceptAandB());
-                    dtp.setMatherialDamagToDifferentThinks(request.isMatherialDamagToDifferentThinks());
-                    dtp.setWitnessesFullNameAndAdresses(request.getWitnessesFullNameAndAdresses());
-                    dtp.setLatitude(request.getLatitude());
-                    dtp.setLongitude(request.getLongitude());
-                    dtp.setFirstUser(firstUser);
-                    dtp.setSecondUser(secondUser);
-                    dtp.setFirstCar(firstCar);
-                    dtp.setSecondCar(car);
-                    dtpService.save(dtp);
-                    DtpDto dtpDto = dtpConverter.convert(dtp);
-                    for (SseEmitter e : MainController.emitters) {
-                        e.send(dtpDto);
-                    }
-                }
+            Dtp dtp = new Dtp();
+            dtp.setFullDtpPlace(request.getFullDtpPlace());
+            dtp.setDate(request.getDate());
+            dtp.setCarCrashedCount(request.getCarCrashedCount());
+            dtp.setVictimsNumbers(request.getVictimsNumbers());
+            dtp.setMatherialDamageToTransportExceptAandB(request.isMatherialDamageToTransportExceptAandB());
+            dtp.setMatherialDamagToDifferentThinks(request.isMatherialDamagToDifferentThinks());
+            dtp.setWitnessesFullNameAndAdresses(request.getWitnessesFullNameAndAdresses());
+            dtp.setLatitude(request.getLatitude());
+            dtp.setLongitude(request.getLongitude());
+//            dtp.setSecondUser(secondUser);
+//            dtp.setFirstCar(firstCar);
+            dtpService.save(dtp);
+            DtpDto dtpDto = dtpConverter.convert(dtp);
+            for (SseEmitter e : MainController.emitters) {
+                e.send(dtpDto);
             }
+
         } catch (Exception e) {
             System.out.println("-----------------------------");
             System.out.println(e.getMessage());

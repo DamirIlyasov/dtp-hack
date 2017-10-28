@@ -27,8 +27,7 @@ public class CarDtoConverter {
 
     public List<CarDto> convertList(List<Car> cars) {
         List<CarDto> dtos = new ArrayList<>();
-        for (Car car :
-                cars) {
+        for (Car car : cars) {
             dtos.add(convert(car));
         }
         return dtos;
