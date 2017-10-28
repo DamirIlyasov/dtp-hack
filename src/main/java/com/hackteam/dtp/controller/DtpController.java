@@ -59,7 +59,12 @@ public class DtpController extends ResponseCreator {
             //first car
             Car firstCar = carService.findOneByCarNumber(request.getFirstUserCarNumber());
 
+
             User secondUser = userService.findOneByPhone(request.getSecondUsersPhoneNumber());
+            System.out.println("--------------------------------");
+            System.out.println(secondUser.toString());
+            System.out.println("--------------------------------");
+
             //second car
             for (Car car : secondUser.getCars()) {
                 if (car.getCarNumber().equals(request.getSecondUsersCarNumber())) {

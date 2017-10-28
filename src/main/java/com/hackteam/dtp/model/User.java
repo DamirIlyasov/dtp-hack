@@ -14,6 +14,40 @@ import java.util.List;
 public class User extends AbstractEntity {
 
 
+    @Override
+    public String toString() {
+        return "User{" +
+                "firstName='" + firstName + '\'' +
+                ", lastName='" + lastName + '\'' +
+                ", middleName='" + middleName + '\'' +
+                ", email='" + email + '\'' +
+                ", phone='" + phone + '\'' +
+                ", password='" + password + '\'' +
+                ", role=" + role +
+                ", avatarUrl='" + avatarUrl + '\'' +
+                ", verified=" + verified +
+                ", verificationCode='" + verificationCode + '\'' +
+                ", passwordRecoveryCode=" + passwordRecoveryCode +
+                ", cars=" + cars +
+                ", licenseSerial='" + licenseSerial + '\'' +
+                ", licenseNumber='" + licenseNumber + '\'' +
+                ", inn='" + inn + '\'' +
+                ", gender='" + gender + '\'' +
+                ", birthday=" + birthday +
+                ", birthPlace='" + birthPlace + '\'' +
+                ", registrationAdress='" + registrationAdress + '\'' +
+                ", citizenship='" + citizenship + '\'' +
+                ", drivingExperience='" + drivingExperience + '\'' +
+                ", passSeria='" + passSeria + '\'' +
+                ", passNumber='" + passNumber + '\'' +
+                ", passGettingDate=" + passGettingDate +
+                ", whoGivedPass='" + whoGivedPass + '\'' +
+                ", snils='" + snils + '\'' +
+                ", acceptPersonalDataTreatment=" + acceptPersonalDataTreatment +
+                ", dtps=" + dtps +
+                '}';
+    }
+
     @NotBlank
     private String firstName;
     @NotBlank
