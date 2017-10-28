@@ -15,6 +15,7 @@ public class DtpConverter {
 
     public DtpDto convert(Dtp dtp) {
         DtpDto dtpDto = new DtpDto();
+        dtpDto.setId(dtp.getId());
         dtpDto.setFullDtpPlace(dtp.getFullDtpPlace());
         dtpDto.setDate(dtp.getDate());
         dtpDto.setCarCrashedCount(dtp.getCarCrashedCount());

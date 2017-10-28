@@ -5,6 +5,7 @@ import com.hackteam.dtp.model.Car;
 import java.util.Date;
 
 public class DtpDto {
+    private Long id;
     private String fullDtpPlace;
     private Date date;
     private int carCrashedCount;
@@ -20,6 +21,13 @@ public class DtpDto {
     private Car firstCar;
     private Car secondCar;
 
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
 
     public Car getFirstCar() {
         return firstCar;
