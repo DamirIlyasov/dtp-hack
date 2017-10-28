@@ -6,7 +6,7 @@ import com.hackteam.dtp.service.DtpService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.sql.Date;
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -17,6 +17,18 @@ public class DtpServiceImpl implements DtpService {
     @Override
     public void save(Dtp dtp) {
         dtpRepository.save(dtp);
+    }
+
+    @Override
+    public List<Dtp> getLast() {
+        List<Dtp> dtps = dtpRepository.findAll();
+        List<Dtp> lastDtps = new ArrayList<>();
+        for (Dtp dtp : dtps) {
+            if (dtp.getDate().getTime() > System.currentTimeMillis() - 7200000L) {
+                lastDtps.add(dtp);
+            }
+        }
+        return lastDtps;
     }
 
     @Override
@@ -35,9 +47,9 @@ public class DtpServiceImpl implements DtpService {
     }
 
     @Override
-    public List<Dtp> getAllByDate() {
-        long l = 2592000000L;
-        return dtpRepository.findAllByDate();
+    public List<Dtp> findAll() {
+//        long l = 2592000000L;
+        return dtpRepository.findAll();
     }
 
     @Override

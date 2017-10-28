@@ -9,7 +9,6 @@ import org.springframework.stereotype.Component;
 
 import javax.annotation.PostConstruct;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 import java.util.Objects;
 
@@ -29,11 +28,18 @@ public class hui {
     private List<Dtp> dtpList;
 
     @PostConstruct
-    private void generateDangerousZones() {
-        dtpList = dtpService.getAllByDate();
-        while(!this.dtpList.isEmpty()){
-            double radius=0.000427917048;
-            findRealCenter(this.dtpList.get(0),this.dtpList,radius);
+    public void generateDangerousZones() {
+        dtpList = dtpService.findAll();
+        List<Dtp> dtps = new ArrayList<>();
+        for (Dtp dtp : dtpList) {
+            if (dtp.getDate().getTime() > (System.currentTimeMillis() - 2592000000L)) {
+                dtps.add(dtp);
+            }
+        }
+        dtpList = dtps;
+        while (!this.dtpList.isEmpty()) {
+            double radius = 0.000427917048;
+            findRealCenter(this.dtpList.get(0), this.dtpList, radius);
         }
     }
 
@@ -48,11 +54,9 @@ public class hui {
         if (!Objects.equals(newCurrCenter.getLatitude(), currCenter.getLatitude()) || !Objects.equals(newCurrCenter.getLongitude(), currCenter.getLongitude())) {
             findRealCenter(newCurrCenter, this.dtpList, radius);
         } else {
-            for (Dtp dtp : dtpInRadius) {
-                this.dtpList.remove(dtp);
-            }
-            if(dtpInRadius.size()>1) {
-                dangerousZoneService.add(new DangerousZones(currCenter.getLatitude(), currCenter.getLongitude(), radius));
+            this.dtpList.removeAll(dtpInRadius);
+            if (dtpInRadius.size() / 30 > 1 / 7) {
+                dangerousZoneService.add(new DangerousZones(currCenter.getLatitude(), currCenter.getLongitude(), 50.0));
             }
         }
     }

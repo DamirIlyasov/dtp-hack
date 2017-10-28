@@ -114,4 +114,22 @@ public class DtpController extends ResponseCreator {
         return createGoodResponse(dangerousZoneService.getAll());
     }
 
+    @ApiImplicitParam(name = "Authorization", paramType = "header", required = true, dataType = "string")
+    @RequestMapping(value = "/dtp/last", method = RequestMethod.GET)
+    public ResponseEntity<ApiResponse<List<DtpDto>>> lastDtp() {
+        return createGoodResponse(dtpConverter.convertList(dtpService.getLast()));
+    }
+
+    @ApiImplicitParam(name = "Authorization", paramType = "header", required = true, dataType = "string")
+    @RequestMapping(value = "/close_dtp", method = RequestMethod.POST)
+    public ResponseEntity<ApiResponse<String>> getDangerousZones(@RequestParam("id") Long id) {
+        try {
+            Dtp dtp = dtpService.findOneById(id);
+            dtp.setFinished(true);
+            dtpService.save(dtp);
+            return createGoodResponse();
+        } catch (Exception e) {
+            return createBadResponse(e.getMessage());
+        }
+    }
 }
