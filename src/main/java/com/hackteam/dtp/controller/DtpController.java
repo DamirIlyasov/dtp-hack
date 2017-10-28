@@ -48,41 +48,45 @@ public class DtpController extends ResponseCreator {
     @ApiImplicitParam(name = "Authorization", paramType = "header", required = true, dataType = "string")
     @RequestMapping(value = "/dtp", method = RequestMethod.POST)
     public ResponseEntity<ApiResponse<String>> registerDtp(@RequestBody RegisterDtpJson request) throws IOException {
-        //first car
-        Car firstCar = carService.findOneByCarNumber(request.getFirstUserCarNumber());
 
-        User secondUser = userService.findOneByPhone(request.getSecondUsersPhoneNumber());
-        //second car
-        Car secondCar = new Car();
-        for (Car car : secondUser.getCars()) {
-            if (car.getCarNumber().equals(request.getSecondUsersCarNumber())) {
-                User firstUser = securityService.getCurrentUser();
-                Dtp dtp = new Dtp();
-                dtp.setFullDtpPlace(request.getFullDtpPlace());
-                dtp.setDate(request.getDate());
-                dtp.setCarCrashedCount(request.getCarCrashedCount());
-                dtp.setVictimsNumbers(request.getVictimsNumbers());
-                dtp.setMatherialDamageToTransportExceptAandB(request.isMatherialDamageToTransportExceptAandB());
-                dtp.setMatherialDamagToDifferentThinks(request.isMatherialDamagToDifferentThinks());
-                dtp.setWitnessesFullNameAndAdresses(request.getWitnessesFullNameAndAdresses());
-                dtp.setLatitude(request.getLatitude());
-                dtp.setLongitude(request.getLongitude());
-                dtp.setFirstUser(firstUser);
-                dtp.setSecondUser(secondUser);
-                dtp.setFirstCar(firstCar);
-                dtp.setSecondCar(car);
-                dtpService.save(dtp);
+        try {
 
 
-                DtpDto dtpDto = dtpConverter.convert(dtp);
+            //first car
+            Car firstCar = carService.findOneByCarNumber(request.getFirstUserCarNumber());
 
-
-                for (SseEmitter e : MainController.emitters) {
-                    e.send(dtpDto);
+            User secondUser = userService.findOneByPhone(request.getSecondUsersPhoneNumber());
+            //second car
+            for (Car car : secondUser.getCars()) {
+                if (car.getCarNumber().equals(request.getSecondUsersCarNumber())) {
+                    User firstUser = securityService.getCurrentUser();
+                    Dtp dtp = new Dtp();
+                    dtp.setFullDtpPlace(request.getFullDtpPlace());
+                    dtp.setDate(request.getDate());
+                    dtp.setCarCrashedCount(request.getCarCrashedCount());
+                    dtp.setVictimsNumbers(request.getVictimsNumbers());
+                    dtp.setMatherialDamageToTransportExceptAandB(request.isMatherialDamageToTransportExceptAandB());
+                    dtp.setMatherialDamagToDifferentThinks(request.isMatherialDamagToDifferentThinks());
+                    dtp.setWitnessesFullNameAndAdresses(request.getWitnessesFullNameAndAdresses());
+                    dtp.setLatitude(request.getLatitude());
+                    dtp.setLongitude(request.getLongitude());
+                    dtp.setFirstUser(firstUser);
+                    dtp.setSecondUser(secondUser);
+                    dtp.setFirstCar(firstCar);
+                    dtp.setSecondCar(car);
+                    dtpService.save(dtp);
+                    DtpDto dtpDto = dtpConverter.convert(dtp);
+                    for (SseEmitter e : MainController.emitters) {
+                        e.send(dtpDto);
+                    }
                 }
             }
+        } catch (Exception e) {
+            System.out.println("-----------------------------");
+            System.out.println(e.getMessage());
+            System.out.println("-----------------------------");
+            e.printStackTrace();
         }
-
 
         return createGoodResponse();
     }

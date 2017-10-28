@@ -63,9 +63,10 @@ public class DtpApplication {
         carService.save(car3);
 
 
-        Car car1 = carService.findOneByCarNumber("ЛО228Х116");
+        Car car1 = carService.findOneByCarNumber("уа123Х116");
         User user = new User();
         user.setAcceptPersonalDataTreatment(true);
+        user.setPhone("89033885946");
         user.setSnils("123123");
         user.setWhoGivedPass("кто-то");
         user.setPassGettingDate(new Date());
