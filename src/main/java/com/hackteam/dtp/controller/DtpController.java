@@ -4,10 +4,8 @@ import com.hackteam.dtp.dto.DtpDto;
 import com.hackteam.dtp.dto.converter.CarDtoConverter;
 import com.hackteam.dtp.dto.converter.DtpConverter;
 import com.hackteam.dtp.dto.converter.UserToDtoConverter;
-import com.hackteam.dtp.model.Car;
 import com.hackteam.dtp.model.DangerousZones;
 import com.hackteam.dtp.model.Dtp;
-import com.hackteam.dtp.model.User;
 import com.hackteam.dtp.service.*;
 import com.hackteam.dtp.util.ApiResponse;
 import com.hackteam.dtp.util.ResponseCreator;
@@ -57,13 +55,13 @@ public class DtpController extends ResponseCreator {
 
 
             //first car
-            Car firstCar = carService.findOneByCarNumber(request.getFirstUserCarNumber());
+//            Car firstCar = carService.findOneByCarNumber(request.getFirstUserCarNumber());
 
 
-            User secondUser = userService.findOneByPhone(request.getSecondUsersPhoneNumber());
-            System.out.println("--------------------------------");
-            System.out.println(secondUser.toString());
-            System.out.println("--------------------------------");
+//            User secondUser = userService.findOneByPhone(request.getSecondUsersPhoneNumber());
+//            System.out.println("--------------------------------");
+//            System.out.println(secondUser.toString());
+//            System.out.println("--------------------------------");
 
             Dtp dtp = new Dtp();
             dtp.setFullDtpPlace(request.getFullDtpPlace());
