@@ -66,6 +66,7 @@ public class Generation {
     }
 
     private List<Car> generateAndGetRandomCars() {
+
         return null;
     }
 
